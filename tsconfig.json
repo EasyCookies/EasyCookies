@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "amd",
+    "module": "ES6",
     "target": "es2015",
-    "outFile": "./dist/easyCookies.js",
+    "outDir": "dist",
     "rootDir": "./src",
     "allowJs": true,
     "sourceMap": true

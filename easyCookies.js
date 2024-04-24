@@ -1,25 +1,17 @@
-define("utils", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function f() {
-    }
-    exports.default = f;
-});
-define("easyCookies", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class EasyCookies {
+var EasyCookies = (function (exports) {
+    'use strict';
+
+    class Banner {
         constructor() {
             this.bannerElement = undefined;
-            this.bannerData = undefined;
             this.options = undefined;
         }
         createBanner() {
             this.bannerElement = document.createElement("div");
             this.bannerElement.innerHTML = `
     <div id="easy-cookies-banner">
-      <h4>${this.bannerData.title}</h3>
-      <p>${this.bannerData.text}</p>
+      <h4>${this.options.data.title}</h3>
+      <p>${this.options.data.text}</p>
       <div>
         <button type="button" id="easy-cookies-accept-btn">
           Accept
@@ -31,8 +23,8 @@ define("easyCookies", ["require", "exports"], function (require, exports) {
     </div>
     `;
             document.body.appendChild(this.bannerElement);
-            document.getElementById('acceptCookies').addEventListener('click', () => this.acceptCookies());
-            document.getElementById('rejectCookies').addEventListener('click', () => this.rejectCookies());
+            document.getElementById('easy-cookies-accept-btn').addEventListener('click', () => this.acceptCookies());
+            document.getElementById('easy-cookies-reject-btn').addEventListener('click', () => this.rejectCookies());
         }
         checkStatus() {
         }
@@ -42,9 +34,13 @@ define("easyCookies", ["require", "exports"], function (require, exports) {
         }
         init(options) {
             if (!options)
-                options = {};
+                options = {
+                    data: {
+                        title: '',
+                        text: '',
+                    }
+                };
             this.options = options;
-            this.bannerData = {};
             // Draw banner
             window.addEventListener('load', () => {
                 this.createBanner();
@@ -52,5 +48,9 @@ define("easyCookies", ["require", "exports"], function (require, exports) {
             });
         }
     }
-});
-//# sourceMappingURL=easyCookies.js.map
+
+    exports.Banner = Banner;
+
+    return exports;
+
+})({});

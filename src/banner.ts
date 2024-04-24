@@ -1,13 +1,11 @@
-import f from './utils';
+import { Options } from "./models/options";
 
-class EasyCookies {
+export class Banner {
   bannerElement: any;
-  bannerData: any;
-  options: any;
+  options: Options;
 
   constructor() {
     this.bannerElement = undefined
-    this.bannerData = undefined
     this.options = undefined
   }
 
@@ -15,8 +13,8 @@ class EasyCookies {
     this.bannerElement = document.createElement("div");
     this.bannerElement.innerHTML = `
     <div id="easy-cookies-banner">
-      <h4>${this.bannerData.title}</h3>
-      <p>${this.bannerData.text}</p>
+      <h4>${this.options.data.title}</h3>
+      <p>${this.options.data.text}</p>
       <div>
         <button type="button" id="easy-cookies-accept-btn">
           Accept
@@ -42,12 +40,16 @@ class EasyCookies {
   rejectCookies() {
   }
 
-  init(options) {
-    if (!options) options = {}
+  init(options: Options) {
+    if (!options)
+      options = {
+        data: {
+          title: '',
+          text: '',
+        }
+      }
 
     this.options = options
-
-    this.bannerData = {}
 
     // Draw banner
     window.addEventListener('load', () => {
