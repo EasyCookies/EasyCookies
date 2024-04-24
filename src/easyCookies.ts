@@ -29,8 +29,8 @@ class EasyCookies {
     `;
     document.body.appendChild(this.bannerElement);
 
-    document.getElementById('acceptCookies').addEventListener('click', () => this.acceptCookies())
-    document.getElementById('rejectCookies').addEventListener('click', () => this.rejectCookies())
+    document.getElementById('easy-cookies-accept-btn').addEventListener('click', () => this.acceptCookies())
+    document.getElementById('easy-cookies-reject-btn').addEventListener('click', () => this.rejectCookies())
   }
 
   checkStatus() {
