@@ -5,12 +5,16 @@
   "main": "easyCookies.js",
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "lite-server -c lite-server-config.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "lite-server": "^2.6.1",
     "rimraf": "^5.0.5"
+  },
+  "dependencies": {
   }
 }

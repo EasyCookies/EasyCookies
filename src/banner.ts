@@ -17,8 +17,8 @@ export class Banner {
     this.bannerElement.id = ids.banner
     this.bannerElement.className = classes.banner
     this.bannerElement.innerHTML = `
-      <h4>${this.options.data.title}</h4>
-      <p>${this.options.data.text}</p>
+      <div id="${ids.title}" class="${classes.title}">${this.options.data.title}</div>
+      <div id="${ids.text}" class="${classes.text}">${this.options.data.text}</div>
       <div class="${classes.btnsContainer}">
         <button type="button" id="${ids.acceptBtn}" class="${classes.acceptBtn}">
           ${this.options.data.acceptBtnText}
@@ -32,6 +32,8 @@ export class Banner {
 
     var style = document.createElement("style")
     style.innerHTML = this.options.styles.banner.getCss(classes.banner) +
+      this.options.styles.title.getCss(classes.title) +
+      this.options.styles.text.getCss(classes.text) +
       this.options.styles.btnsContainer.getCss(classes.btnsContainer) +
       this.options.styles.acceptBtn.getCss(classes.acceptBtn) +
       this.options.styles.rejectBtn.getCss(classes.rejectBtn)

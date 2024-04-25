@@ -1,0 +1,5 @@
+{
+    "port": 8042,
+    "files": ["./**/*.{html,htm,css,js,ico,svg}"],
+    "server": { "baseDir": "./" }
+  }
