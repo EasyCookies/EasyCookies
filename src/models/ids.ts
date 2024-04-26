@@ -3,7 +3,7 @@ export const classes = {
   banner: "easy-cookies-banner",
   btnsContainer: "easy-cookies-btns-container",
   title: "easy-cookies-title",
-  text: "easy-cookies-title",
+  text: "easy-cookies-text",
   acceptBtn: "easy-cookies-accept-btn",
   rejectBtn: "easy-cookies-reject-btn",
 }

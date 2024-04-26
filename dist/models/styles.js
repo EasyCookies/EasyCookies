@@ -6,21 +6,21 @@ export class Style {
         for (const prop of ownProps) {
             if (allProps.indexOf(prop) < 0)
                 continue; // Skip if not present in the prototype chain
-            let val = this[prop];
-            if (typeof val === "string")
-                res += `${this.camelCaseToHyphen(prop)}: ${val}; `;
+            let val = obj[prop];
+            if (typeof val === "string") {
+                //convert to CSS property name
+                let cssProp = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
+                res += `${cssProp}: ${val}; `;
+            }
         }
         return `.${className} { ${res}} `;
     }
     getCss(className) {
         let res = this.propsToCss(this, className);
         if (this["hover"] != undefined) {
-            res += this.propsToCss(this["hover"], className + ": hover");
+            res += this.propsToCss(this["hover"], className + ":hover");
         }
         return res;
-    }
-    camelCaseToHyphen(propertyName) {
-        return propertyName.replace(/([A-Z])/g, '-$1').toLowerCase();
     }
 }
 export class BannerStyle extends Style {
@@ -42,12 +42,15 @@ export class TitleStyle extends Style {
     constructor() {
         super(...arguments);
         this.fontWeight = "bold";
+        this.fontSize = "18px";
+        this.paddingBottom = "8px";
     }
 }
 export class TextStyle extends Style {
     constructor() {
         super(...arguments);
-        this.padding = "16px 0px";
+        this.paddingBottom = "16px";
+        this.fontSize = "14px";
     }
 }
 export class btnsContainerStyle extends Style {
@@ -62,24 +65,31 @@ export class btnsContainerStyle extends Style {
 export class BtnStyle extends Style {
     constructor() {
         super(...arguments);
+        this.fontSize = "14px";
         this.color = "#263238";
         this.backgroundColor = "white";
         this.padding = "10px 20px";
         this.borderRadius = "8px";
-        this.borderColor = "transparent";
+        this.border = "1px solid #cfd8dc";
         this.cursor = "pointer";
     }
 }
 export class AcceptBtnStyle extends BtnStyle {
     constructor() {
         super(...arguments);
-        this.backgroundColor = "green";
+        this.backgroundColor = "#B3E5FC";
+        this.hover = {
+            backgroundColor: "#81D4FA"
+        };
     }
 }
 export class RejectBtnStyle extends BtnStyle {
     constructor() {
         super(...arguments);
-        this.backgroundColor = "red";
+        this.backgroundColor = "#FAFAFA";
+        this.hover = {
+            backgroundColor: "#F5F5F5"
+        };
     }
 }
 export class Styles {

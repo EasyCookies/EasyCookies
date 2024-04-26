@@ -7,23 +7,22 @@ export class Style {
     for (const prop of ownProps) {
       if (allProps.indexOf(prop) < 0)
         continue // Skip if not present in the prototype chain
-      let val = this[prop]
-      if (typeof val === "string")
-        res += `${this.camelCaseToHyphen(prop)}: ${val}; `
+      let val = obj[prop]
+      if (typeof val === "string") {
+        //convert to CSS property name
+        let cssProp = prop.replace(/([A-Z])/g, '-$1').toLowerCase()
+        res += `${cssProp}: ${val}; `
+      }
     }
     return `.${className} { ${res}} `;
   }
 
   getCss(className: string): string {
     let res = this.propsToCss(this, className)
-    if(this["hover"] != undefined){
-      res += this.propsToCss(this["hover"], className + ": hover")
+    if (this["hover"] != undefined) {
+      res += this.propsToCss(this["hover"], className + ":hover")
     }
-    return res;
-  }
-
-  camelCaseToHyphen(propertyName: string): string {
-    return propertyName.replace(/([A-Z])/g, '-$1').toLowerCase()
+    return res
   }
 }
 
@@ -42,10 +41,13 @@ export class BannerStyle extends Style {
 
 export class TitleStyle extends Style {
   fontWeight: string | undefined = "bold"
+  fontSize: string | undefined = "18px"
+  paddingBottom: string | undefined = "8px"
 }
 
 export class TextStyle extends Style {
-  padding: string | undefined = "16px 0px"
+  paddingBottom: string | undefined = "16px"
+  fontSize: string | undefined = "14px"
 }
 
 export class btnsContainerStyle extends Style {
@@ -56,23 +58,27 @@ export class btnsContainerStyle extends Style {
 }
 
 export class BtnStyle extends Style {
+  fontSize: string | undefined = "14px"
   color: string | undefined = "#263238"
   backgroundColor: string | undefined = "white"
   padding: string | undefined = "10px 20px"
   borderRadius: string | undefined = "8px"
-  borderColor: string | undefined = "transparent"
+  border: string | undefined = "1px solid #cfd8dc"
   cursor: string | undefined = "pointer"
-  hover: {
-    opacity: "0.8"
-  }
 }
 
 export class AcceptBtnStyle extends BtnStyle {
-  backgroundColor: string | undefined = "green"
+  backgroundColor: string | undefined = "#B3E5FC"
+  hover = {
+    backgroundColor: "#81D4FA"
+  }
 }
 
 export class RejectBtnStyle extends BtnStyle {
-  backgroundColor: string | undefined = "red"
+  backgroundColor: string | undefined = "#FAFAFA"
+  hover = {
+    backgroundColor: "#F5F5F5"
+  }
 }
 
 export class Styles {

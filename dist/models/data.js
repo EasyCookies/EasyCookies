@@ -1,7 +1,7 @@
 export class Data {
     constructor() {
-        this.title = "This website uses cookies";
-        this.text = "We use cookies to improve your experience.";
+        this.title = "A quick note about cookies 🍪";
+        this.text = "This website uses a few cookies to make things run smoothly";
         this.acceptBtnText = "Accept";
         this.rejectBtnText = "Reject";
     }
