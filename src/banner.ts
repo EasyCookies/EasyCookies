@@ -12,8 +12,17 @@ export class Banner {
     this.options = options
   }
 
+  hideBanner() {
+    this.bannerElement.style.display = "none"
+  }
+
+  showBanner() {
+    this.bannerElement.style.display = "block"
+  }
+
   createBanner() {
     this.bannerElement = document.createElement("div")
+    this.hideBanner()
     this.bannerElement.id = ids.banner
     this.bannerElement.className = classes.banner
     this.bannerElement.innerHTML = `
@@ -44,12 +53,48 @@ export class Banner {
   }
 
   checkStatus() {
+    switch (localStorage.getItem("EasyCookies")) {
+      case "1":
+        this.hideBanner();
+        break;
+      case "0":
+        this.showBanner();
+        break;
+      default:
+        this.showBanner();
+    }
   }
 
   acceptCookies() {
+    localStorage.setItem("EasyCookies", "1")
+    this.addTrackingScripts()
+    this.hideBanner()
   }
 
   rejectCookies() {
+    localStorage.setItem("EasyCookies", "0")
+    this.removeTrackingScripts()
+    this.hideBanner()
+  }
+
+  addTrackingScripts() {
+    const gtag = this.options.scripts.gTag
+    if (gtag !== undefined && gtag !== "") {
+      let gTagScript1 = document.createElement("script")
+      gTagScript1.async = true
+      gTagScript1.src = `https://www.googletagmanager.com/gtag/js?id=${gtag}`
+      document.head.appendChild(gTagScript1)
+      let gTagScript2 = document.createElement("script")
+      gTagScript2.innerHTML = `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${gtag}');`
+      document.head.appendChild(gTagScript2)
+    }
+  }
+
+  removeTrackingScripts() {
+
   }
 
   init() {

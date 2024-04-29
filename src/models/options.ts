@@ -1,13 +1,21 @@
 import { Data } from "./data";
+import { Scripts } from "./scripts";
 import { Style, Styles } from "./styles";
 
 export class Options {
+  scripts: Scripts = new Scripts()
   data: Data = new Data()
   styles: Styles = new Styles()
 }
 
 export function mergeOptions(defaultOptions: Options, customOptions: any): Options {
   const mergedOptions = new Options();
+
+  // Merge Scripts
+  mergedOptions.scripts = {
+    ...defaultOptions.scripts,
+    ...customOptions.scripts
+  };
 
   // Merge Data
   mergedOptions.data = {

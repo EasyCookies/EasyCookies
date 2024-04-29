@@ -1,13 +1,17 @@
 import { Data } from "./data";
+import { Scripts } from "./scripts";
 import { Styles } from "./styles";
 export class Options {
     constructor() {
+        this.scripts = new Scripts();
         this.data = new Data();
         this.styles = new Styles();
     }
 }
 export function mergeOptions(defaultOptions, customOptions) {
     const mergedOptions = new Options();
+    // Merge Scripts
+    mergedOptions.scripts = Object.assign(Object.assign({}, defaultOptions.scripts), customOptions.scripts);
     // Merge Data
     mergedOptions.data = Object.assign(Object.assign({}, defaultOptions.data), customOptions.data);
     // Merge Styles
