@@ -1,6 +1,6 @@
 export class Scripts {
     constructor() {
-        this.gTag = "";
+        this.gtag = "";
     }
 }
 //# sourceMappingURL=scripts.js.map

@@ -11,13 +11,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.0",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "express": "^4.19.2"
   },
   "dependencies": {
-    "express": "^4.19.2"
   }
 }

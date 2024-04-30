@@ -3,14 +3,13 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="viewport"
     content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
   <meta name="robots" content="index, follow">
   <title>Test</title>
   <meta name="description" content="" />
   <meta property="og:title" content="" />
-  <meta property="og:site_name" content="Cssville" />
+  <meta property="og:site_name" content="" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="" />
   <meta property="og:image" content="" />
@@ -19,7 +18,7 @@
   <meta name="twitter:description" content="" />
   <meta name="twitter:image" content="" />
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="keywords" content="CSS utility-first framework" />
+  <meta name="keywords" content="" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -29,10 +28,15 @@
 
 <body class="p-0 m-0">
   <script>
-    const myCookieBanner = new EasyCookies.Banner({
+    window.easyCookiesBanner = new EasyCookies.Banner({
+      scripts: {
+        gtag: 'AW-123456789'
+      },
       data: {
         title: "This website uses cookies 🍪🍪🍪",
-        text: "We use cookies to improve your experience."
+        text: "We use cookies to improve your experience.",
+        acceptBtnText: 'Accept cookies',
+        rejectBtnText: 'Reject'
       },
       styles: {
         banner: {
@@ -40,12 +44,17 @@
           color: "black",
           maxWidth: "400px",
           boxShadow: "rgba(144, 164, 174, 0.3) 0px 6px 12px 0px"
+        },
+        rejectBtn: {
+          display: 'block'
         }
       }
     });
-    myCookieBanner.init(); 
+    window.easyCookiesBanner.init(); 
   </script>
-  <div class="d-flex min-h-100vh flex-direction-column w-12" id="root" style="min-height: 2000px;"></div>
+  <div class="d-flex min-h-100vh flex-direction-column w-12" id="root" style="min-height: 2000px;">
+    <button onclick="window.easyCookiesBanner.show()">Show banner</button>
+  </div>
 </body>
 
 </html>

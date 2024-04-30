@@ -29,7 +29,7 @@ var EasyCookies = (function (exports) {
 
     class Scripts {
         constructor() {
-            this.gTag = "";
+            this.gtag = "";
         }
     }
 
@@ -171,6 +171,7 @@ var EasyCookies = (function (exports) {
         return mergedStyle;
     }
 
+    let gtag;
     class Banner {
         constructor(options) {
             this.bannerElement = undefined;
@@ -178,15 +179,15 @@ var EasyCookies = (function (exports) {
             options = !options ? defaultOptions : mergeOptions(defaultOptions, options);
             this.options = options;
         }
-        hideBanner() {
+        hide() {
             this.bannerElement.style.display = "none";
         }
-        showBanner() {
+        show() {
             this.bannerElement.style.display = "block";
         }
-        createBanner() {
+        create() {
             this.bannerElement = document.createElement("div");
-            this.hideBanner();
+            this.hide();
             this.bannerElement.id = ids.banner;
             this.bannerElement.className = classes.banner;
             this.bannerElement.innerHTML = `
@@ -216,45 +217,72 @@ var EasyCookies = (function (exports) {
         checkStatus() {
             switch (localStorage.getItem("EasyCookies")) {
                 case "1":
-                    this.hideBanner();
+                    this.hide();
                     break;
                 case "0":
-                    this.showBanner();
+                    this.hide();
                     break;
                 default:
-                    this.showBanner();
+                    this.show();
             }
         }
         acceptCookies() {
             localStorage.setItem("EasyCookies", "1");
-            this.addTrackingScripts();
-            this.hideBanner();
+            this.gtagConsentGranted();
+            this.hide();
         }
         rejectCookies() {
             localStorage.setItem("EasyCookies", "0");
-            this.removeTrackingScripts();
-            this.hideBanner();
+            this.gtagConsentDenied();
+            this.hide();
         }
-        addTrackingScripts() {
-            const gtag = this.options.scripts.gTag;
-            if (gtag !== undefined && gtag !== "") {
-                let gTagScript1 = document.createElement("script");
-                gTagScript1.async = true;
-                gTagScript1.src = `https://www.googletagmanager.com/gtag/js?id=${gtag}`;
-                document.head.appendChild(gTagScript1);
-                let gTagScript2 = document.createElement("script");
-                gTagScript2.innerHTML = `window.dataLayer = window.dataLayer || [];
+        gtagAdd() {
+            const gtagId = this.options.scripts.gtag;
+            if (gtagId !== undefined && gtagId !== "") {
+                let gTag = document.createElement("script");
+                gTag.async = true;
+                gTag.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`;
+                document.head.appendChild(gTag);
+                let gTagData = document.createElement("script");
+                gTagData.innerHTML = `window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
       gtag('js', new Date());
-      gtag('config', '${gtag}');`;
-                document.head.appendChild(gTagScript2);
+      gtag('config', '${gtagId}');`;
+                document.head.appendChild(gTagData);
             }
         }
-        removeTrackingScripts() {
+        gtagConsentGranted() {
+            const gtagId = this.options.scripts.gtag;
+            if (gtagId !== undefined && gtagId !== "") {
+                gtag('consent', 'update', {
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted',
+                    'ad_storage': 'granted',
+                    'analytics_storage': 'granted'
+                });
+            }
+        }
+        gtagConsentDenied() {
+            const gtagId = this.options.scripts.gtag;
+            if (gtagId !== undefined && gtagId !== "") {
+                gtag('consent', 'update', {
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'ad_storage': 'denied',
+                    'analytics_storage': 'denied'
+                });
+            }
         }
         init() {
             window.addEventListener('load', () => {
-                this.createBanner();
+                this.create();
+                this.gtagAdd();
                 this.checkStatus();
             });
         }
