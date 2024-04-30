@@ -171,7 +171,6 @@ var EasyCookies = (function (exports) {
         return mergedStyle;
     }
 
-    let gtag;
     class Banner {
         constructor(options) {
             this.bannerElement = undefined;

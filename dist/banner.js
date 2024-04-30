@@ -1,6 +1,5 @@
 import { classes, ids } from "./models/ids";
 import { Options, mergeOptions } from "./models/options";
-let gtag;
 export class Banner {
     constructor(options) {
         this.bannerElement = undefined;

@@ -1,7 +1,7 @@
 import { classes, ids } from "./models/ids";
 import { Options, mergeOptions } from "./models/options";
 
-let gtag: any;
+declare function gtag(command: 'consent' | 'config', ...args: any[]): void;
 
 export class Banner {
   bannerElement: HTMLDivElement;
