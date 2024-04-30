@@ -1,5 +1,5 @@
 export default {
-	input: 'dist/banner.js',
+	input: 'build_artifacts/banner.js',
 	output: {
 		file: 'easyCookies.js',
 		format: 'iife',

@@ -4,7 +4,7 @@
   "description": "",
   "main": "easyCookies.js",
   "scripts": {
-    "build": "rimraf dist && tsc && rollup -c",
+    "build": "rimraf build_artifacts && tsc && rollup -c && rimraf build_artifacts",
     "dev": "nodemon --watch src --ext ts --exec npm run build",
     "server": "nodemon server.js",
     "start": "concurrently \"npm run dev\" \"npm run server\""
