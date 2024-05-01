@@ -27,6 +27,7 @@ export class Style {
 }
 
 export class BannerStyle extends Style {
+  zIndex: string | undefined = "9999"
   color: string | undefined = "#263238"
   backgroundColor: string | undefined = "white"
   border: string | undefined = "1px solid #cfd8dc"

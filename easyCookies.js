@@ -62,6 +62,7 @@ var EasyCookies = (function (exports) {
     class BannerStyle extends Style {
         constructor() {
             super(...arguments);
+            this.zIndex = "9999";
             this.color = "#263238";
             this.backgroundColor = "white";
             this.border = "1px solid #cfd8dc";
