@@ -79,31 +79,53 @@ export class Banner {
     this.hide()
   }
 
-  gtagAdd() {
-    const gtagId = this.options.scripts.gtag
-    if (gtagId !== undefined && gtagId !== "") {
-      let gTag = document.createElement("script")
-      gTag.async = true
-      gTag.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`
-      document.head.appendChild(gTag)
-      let gTagData = document.createElement("script")
-      gTagData.innerHTML = `window.dataLayer = window.dataLayer || [];
+  gtagAddFunctionScript() {
+    let gTagData = document.createElement("script")
+    gTagData.innerHTML = `window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('consent', 'default', {
         'ad_storage': 'denied',
         'ad_user_data': 'denied',
         'ad_personalization': 'denied',
         'analytics_storage': 'denied'
-      });
-      gtag('js', new Date());
-      gtag('config', '${gtagId}');`
+      });`
+    document.head.appendChild(gTagData)
+  }
+
+  gtagAdd() {
+    const gtagId = this.options.scripts.gtag
+    const gtmId = this.options.scripts.gtm
+    if (gtagId !== undefined && gtagId !== "") {
+      this.gtagAddFunctionScript()
+      let gTag = document.createElement("script")
+      gTag.async = true
+      gTag.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`
+      document.head.appendChild(gTag)
+      let gTagData = document.createElement("script")
+      gTagData.innerHTML = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${gtagId}');`
       document.head.appendChild(gTagData)
+    }
+    else if (gtmId !== undefined && gtmId !== "") {
+      this.gtagAddFunctionScript()
+      let gtmScript = document.createElement("script")
+      gtmScript.innerHTML = `
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','${gtmId}');`
+      document.head.appendChild(gtmScript)
     }
   }
 
   gtagConsentGranted() {
     const gtagId = this.options.scripts.gtag
-    if (gtagId !== undefined && gtagId !== "") {
+    const gtmId = this.options.scripts.gtm
+    if ((gtagId !== undefined && gtagId !== "") || (gtmId !== undefined && gtmId !== "")) {
       gtag('consent', 'update', {
         'ad_user_data': 'granted',
         'ad_personalization': 'granted',
@@ -115,7 +137,8 @@ export class Banner {
 
   gtagConsentDenied() {
     const gtagId = this.options.scripts.gtag
-    if (gtagId !== undefined && gtagId !== "") {
+    const gtmId = this.options.scripts.gtm
+    if ((gtagId !== undefined && gtagId !== "") || (gtmId !== undefined && gtmId !== "")) {
       gtag('consent', 'update', {
         'ad_user_data': 'denied',
         'ad_personalization': 'denied',
