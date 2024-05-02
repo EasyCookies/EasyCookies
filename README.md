@@ -7,6 +7,9 @@
 
 A customizable cookie consent banner library for websites.
 
+![demo](https://github.com/EasyCookies/EasyCookies/assets/6689884/3809e265-d4a6-483d-bfab-02fefc3acad9)
+
+
 ## Usage
 
 Add this code to your html `<head>` tag:
