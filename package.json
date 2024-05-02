@@ -1,11 +1,12 @@
 {
   "name": "easycookies",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "easyCookies.js",
   "scripts": {
-    "build": "rimraf build_artifacts && tsc && rollup -c && rimraf build_artifacts",
+    "build": "rimraf build_artifacts && rimraf easyCookies.min.js && tsc && rollup -c && rimraf build_artifacts && npm run minify",
     "dev": "nodemon --watch src --ext ts --exec npm run build",
+    "minify": "uglifyjs easyCookies.js -c -o easyCookies.min.js",
     "server": "nodemon server.js",
     "start": "concurrently \"npm run dev\" \"npm run server\""
   },
@@ -14,9 +15,10 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "express": "^4.19.2",
     "nodemon": "^3.1.0",
     "rimraf": "^5.0.5",
-    "express": "^4.19.2"
+    "uglify-js": "^3.17.4"
   },
   "dependencies": {
   }
