@@ -7,14 +7,15 @@
 
 A customizable cookie consent banner library for websites.
 
-![demo](https://github.com/EasyCookies/EasyCookies/assets/6689884/3809e265-d4a6-483d-bfab-02fefc3acad9)
-
+![EasyCookies](https://github.com/EasyCookies/EasyCookies/assets/6689884/1f424fa5-7f5a-43a7-9898-9c501d9dc73d)
 
 ## Usage
 
 Add this code to your html `<head>` tag:
 ```html
+
 <script src="https://cdn.jsdelivr.net/gh/EasyCookies/EasyCookies@0.0.2/easyCookies.min.js"></script>
+
 ```
 
 Then initialize the banner by adding the following code to you html `<body>` tag:
