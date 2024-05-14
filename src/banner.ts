@@ -4,6 +4,7 @@ import { Options, mergeOptions } from "./models/options";
 declare function gtag(command: 'consent' | 'config', ...args: any[]): void;
 
 export class Banner {
+  
   bannerElement: HTMLDivElement;
   options: Options
 

@@ -4,10 +4,11 @@
   "description": "",
   "main": "easyCookies.js",
   "scripts": {
-    "build": "rimraf build_artifacts && rimraf easyCookies.min.js && tsc && rollup -c && rimraf build_artifacts && npm run minify",
+    "build": "rimraf build_artifacts && rimraf easyCookies.min.js && tsc && rollup -c && rimraf build_artifacts && npm run minify && npm run minify-dev",
     "dev": "nodemon --watch src --ext ts --exec npm run build",
     "minify": "uglifyjs easyCookies.js -c -o easyCookies.min.js",
-    "server": "nodemon server.js",
+    "minify-dev": "uglifyjs easyCookies.js -c -o dev/easyCookies.min.js",
+    "server": "nodemon dev/server.js",
     "start": "concurrently \"npm run dev\" \"npm run server\""
   },
   "keywords": [],
